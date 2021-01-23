@@ -1,0 +1,187 @@
+#====================== CDTS upload info
+CDTS_usr = F19FTSECWLJtest
+CDTS_pwd = password8888
+CDTS_loc = WH  ##HK/WH/SZ
+
+#====================== xreport info
+genome_source_info = UCSC  
+genome_version_info = genomeversion
+bgi_manager_mail = zhouyanfei@genomics.cn
+bgi_analysis_mail = chenjunhui@genomics.cn
+sub_project_code = HICygxD  #真实子项目代码
+
+#====================== Project Information
+ProjectName = F20FTSCCKF1773
+Species = Nitraria_sibirica
+Department = PAP
+Qsub = -P HICygxD  -q  bc.q
+AnalystEmail = chenjunhui@genomics.cn
+ChineseReport = YES # YES or NO
+CleanGnum = 6 # unit: GB base
+Seq_Platform = BGISEQ-500 #hiseq2000 # hiseq2000 or hiseq4000 #BGISEQ-500 [ps: if hiseq2500, please set to hiseq2000 ]
+AnalyseType = RNAref
+ERCC = No
+
+#====================== input files
+Gene2Symbol =  # optional
+Genome_Fasta = /zfswh1/BC_COM_P4/F14HTSCCKF1991-01/RANgesT/F20FTSECWLJ6093_PALepaE/00.ref/01.index/GenomeGatkIndex/chrALL.fa #chrALL.fa # with .fai(samtools) & .dict(gatk) index
+Gene_Fasta = /zfswh1/BC_COM_P4/F14HTSCCKF1991-01/RANgesT/F20FTSECWLJ6093_PALepaE/00.ref/01.index/GeneBowtie2Index/refMrna.fa  #refMrna.fa
+Gene2Tr = /zfswh1/BC_COM_P4/F14HTSCCKF1991-01/RANgesT/F20FTSECWLJ6093_PALepaE/00.ref/01.index//zfswh1/BC_COM_P4/F14HTSCCKF1991-01/RANgesT/F20FTSECWLJ6093_PALepaE/00.ref/01.index/gtf/refMrna.gtf/gene2tr.txt
+HISAT_Index = 
+GO_Prefix = /zfswh1/BC_COM_P4/F14HTSCCKF1991-01/RANgesT/F20FTSECWLJ6093_PALepaE/00.ref/01.index/KOGO/KOGO/data/species #go prefix
+KO = /zfswh1/BC_COM_P4/F14HTSCCKF1991-01/RANgesT/F20FTSECWLJ6093_PALepaE/00.ref/01.index/KOGO/KOGO/data/species.ko #*.ko
+NR_Desc = /zfswh1/BC_COM_P4/F14HTSCCKF1991-01/RANgesT/F20FTSECWLJ6093_PALepaE/00.ref/01.index/KOGO/KOGO/data/species.nr.desc #*.nr.desc
+
+#====================== input files only for RNAref
+mRNA_GTF = mRNAGTF  #hg19_filter.clean.psl./zfswh1/BC_COM_P4/F14HTSCCKF1991-01/RANgesT/F20FTSECWLJ6093_PALepaE/00.ref/01.index/gtf/refMrna.gtf
+lncRNA_GTF =  #optional, used for konwn lncRNA filtering
+Protein_Fasta = /zfswh1/BC_COM_P4/F14HTSCCKF1991-01/RANgesT/F20FTSECWLJ6093_PALepaE/00.ref/01.index/pepindex/refPep.fa  # used for CPC coding prediction
+
+#====================== Rm_rRNA
+Rm_rRNA_Method = Bowtie2
+rRNA = /ifswh1/BC_PUB/biosoft/database/Pub/rRNA/plant/rRNA.fa # rRNA should be created Bowtie2 index
+Rm_rRNA_Options = --very-sensitive-local --no-unal -I 1 -X 1000 -p 3
+#Paired-end: --very-sensitive-local --no-unal -I 1 -X 1000 -p 3
+##Single end: --very-sensitive-local --no-unal -p 3
+
+
+#====================== Filter
+Filter_Method = SOAPnuke
+SOAPnuke_Options = -l 15 -q 0.2 -n 0.05 
+Filter_Adp5 = AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGTA  # optional
+Filter_Adp3 = AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC  # optional
+
+#====================== Genome Mapping
+GenomeMapping_Method = HISAT
+HISAT_Options_PE = --phred64 --sensitive --no-discordant --no-mixed -I 1 -X 1000 # non-strand-specific
+#HISAT_Options_PE = --phred64 --sensitive --no-discordant --no-mixed -I 1 -X 1000 --rna-strandness RF # strand-specific
+#HISAT_Options_SE = -p 8 --phred64 --sensitive -I 1 -X 1000    # non-strand-specific 
+#HISAT_Options_SE = -p 8 --phred64 --sensitive -I 1 -X 1000 --rna-strandness R  # strand-specific
+
+#====================== Novel Transcript and Annotation
+NovelTr_Method = Cuffcompare
+NovelTr_WithDiff = YES   # YES or NO ,if NO, NovelTr won`t be added into Diff analysis 
+StringTie_Options = -f 0.3 -j 3 -c 5 -g 100 -s 10000 -p 8   # non-strand-specific
+#StringTie_Options = -f 0.3 -j 3 -c 5 -g 100 -s 10000 -p 8 --rf   # strand-specific
+Cuffmerge_Options = -p 12
+Annotation_GO_method = idmapping ### blast2go or idmapping (idmapping for new nr database)
+Annotation_Software = diamond 			# diamond or blast
+Annotation_Options = -evalue 1e-5 -topHit 5 -split 10  	# if chose blast, -split 30 will better
+Annotation_dbClass = pl   	# an(animal) or pl(plant) or fg(fungi)
+Annotation_dbVersion = /ifswh1/BC_PUB/biosoft/pipeline/RNA/RNA_RNAref/RNA_RNAref_2018a/prepare/NovelTr_db_version.txt
+
+#====================== SNP & INDEL
+SnpIndel_Method = GATK
+dbSNP =  # /ifshk4/BC_PUB/biosoft/PIPE_RD/RNA/RNA_RNAref/RNA_RNAref_version5.0_beta/Database/hg19/dbsnp_132.hg19.vcf # optional
+GATK_CallOptions = -allowPotentiallyMisencodedQuals -stand_call_conf 20.0 -stand_emit_conf 20.0
+GATK_FilterOptions = -window 35 -cluster 3 -filterName FS -filter "FS > 30.0" -filterName QD -filter "QD < 2.0"
+
+#===================== GeneFusion
+#GeneFusion_Method = SOAPfuse
+SOAPfuse_Options = -fs 1 -tp 9 -fm
+
+#====================== Gene Diff Splicing
+#GeneDiffSplice_Method = rMATS
+rMATS_Options = -analysis U -t paired -a 8 # non-strand-specific
+#rMATS_Options = -analysis U -t paired -a 8 -libType fr-firststrand  # strand-specific
+rMATS_Group = rMATSGroup
+rMATS_VS = rMATSVS
+rMATS_Filter = -c 0.05
+
+#====================== Gene Expression
+GeneExp_Method = RSEM
+Bowtie2_Options_PE = -q --phred64 --sensitive --dpad 0 --gbar 99999999 --mp 1,1 --np 1 --score-min L,0,-0.1 -I 1 -X 1000 --no-mixed --no-discordant  -p 1 -k 200
+#Bowtie2_Options_SE = -q --phred64 --sensitive --dpad 0 --gbar 99999999 --mp 1,1 --np 1 --score-min L,0,-0.1 -p 16 -k 200
+RSEM_Options = --forward-prob 0.5 # non-strand-specific
+#RSEM_Options = --forward-prob 0  # strand-specific
+PCA_Group = PCAGroup
+PCA_Plan = pcaPlan
+Venn_Group = vennGroup
+Venn_Plan = vennPlan
+
+#===================== ClusterforExp
+#ExpCluster_method = cluster
+ExpClusterPlan = 
+
+
+#====================== Circos
+#Circos_Method = Perl
+Window_Size = 1000000
+Chromosome_Unit = 1000000
+Chr_Label_Size = 15p
+Chr_Tick_Size = 8p
+Figure_Type = 1 # 1:Include gene fusion (Human, and Genome_Fasta ID has to start with ">chr*")  
+		# 2:Exclude gene fusion (Other species or Human Other Genome_Fasta ID )
+
+#===================== TimeClustering
+TimeClustering_Method = Mfuzz
+Mfuzz_Group = mfuzzGroup
+Mfuzz_plan = mfuzzPlan(-c:16,-m:1.35) # 3 or more than 3 sample each plan 
+Mfuzz_Options = -c 12 -m 1.25
+
+#===================== GeneCoExpression
+GeneCoExpression_method = WGCNA
+GeneFracThreshold = 0.5
+WGCNA_Options = -percent 4 -weight 0.8
+
+#====================== Gene Diff Expression
+GeneDiffExp_Method = DEGseq
+DEGseq_Group = Nt_CK:Nt_ck_1,Nt_ck_2,Nt_ck_3 Nt_500mM_12h:Nt_500m_12h_3,Nt_500m_12h_1,Nt_500m_12h_2 Nt_500mM_24h:Nt_500m_24h_1,Nt_500m_24h_2,Nt_500m_24h_3 Nt_200mM_6h:Nt_200m_6h_1,Nt_200m_6h_2,Nt_200m_6h_3 Nt_500mM_48h:Nt_500m_48h_1,Nt_500m_48h_2,Nt_500m_48h_3 Nt_200mM_12h:Nt_200m_12h_1,Nt_200m_12h_2,Nt_200m_12h_3 Nt_200mM_24h:Nt_200m_24h_1,Nt_200m_24h_2,Nt_200m_24h_3 Nt_200mM_48h:Nt_200m_48h_1,Nt_200m_48h_2,Nt_200m_48h_3 Nt_500mM_6h:Nt_500m_6h_1,Nt_500m_6h_2,Nt_500m_6h_3
+DEGseq_VS = Nt_CK&Nt_200mM_6h,Nt_CK&Nt_500mM_6h,Nt_CK&Nt_200mM_12h,Nt_CK&Nt_500mM_12h,Nt_CK&Nt_200mM_24h,Nt_CK&Nt_500mM_24h,Nt_CK&Nt_200mM_48h,Nt_CK&Nt_500mM_48h,Nt_200mM_6h&Nt_200mM_12h,Nt_500mM_6h&Nt_500mM_12h,Nt_200mM_6h&Nt_200mM_24h,Nt_500mM_6h&Nt_500mM_24h,Nt_200mM_6h&Nt_200mM_48h,Nt_500mM_6h&Nt_500mM_48h,Nt_200mM_12h&Nt_200mM_24h,Nt_500mM_12h&Nt_500mM_24h,Nt_200mM_12h&Nt_200mM_48h,Nt_500mM_12h&Nt_500mM_48h,Nt_200mM_24h&Nt_200mM_24h,Nt_500mM_24h&Nt_500mM_48h,Nt_200mM_6h&Nt_500mM_6h,Nt_200mM_12h&Nt_500mM_12h,Nt_200mM_24h&Nt_500mM_24h,Nt_200mM_48h&Nt_500mM_48h
+DEGseq_Filter = -foldChange 2 -qValue 0.001
+
+#GeneDiffExp_Method = PossionDis
+PossionDis_VS = HBRR1&UHRR1,HBRR2&UHRR2 
+PossionDis_Filter = -log2 1 -fdr 0.001
+
+#GeneDiffExp_Method = NOIseq
+NOIseq_Group = HBRR:HBRR1,HBRR2,HBRR3 UHRR:UHRR1,UHRR2,UHRR3
+NOIseq_VS = HBRR&UHRR
+NOIseq_Filter = -log2 1 -p 0.8
+
+#GeneDiffExp_Method = EBseq
+EBseq_Group = HBRR:HBRR1,HBRR2,HBRR3 UHRR:UHRR1,UHRR2,UHRR3
+EBseq_VS = HBRR&UHRR
+EBseq_Filter = -log2 1 -ppee 0.05
+
+#GeneDiffExp_Method = DEseq2
+DEseq2_Group = HBRR:HBRR1,HBRR2,HBRR3 UHRR:UHRR1,UHRR2,UHRR3
+DEseq2_VS = HBRR&UHRR
+DEseq2_Filter = -log2 1 -padj 0.05
+
+#====================== DEG Cluster
+Cluster_Method = Pheatmap
+Cluster_Plan = 
+
+#====================== DEG GO Enrichment
+GO_Method = Hypergeometric
+
+#====================== DEG Pathway Enrichment
+Pathway_Method = Hypergeometric
+
+#====================== DEG Venn
+#DiffVenn_Plan = HBRR-VS-UHRR:DEGseq,HBRR-VS-UHRR:NOIseq,HBRR-VS-UHRR:DEseq2,HBRR-VS-UHRR:EBseq test3//HBRR-VS-UHRR:NOIseq,HBRR-VS-UHRR:DEseq2,HBRR-VS-UHRR:EBseq,HBRR2-VS-UHRR2:PossionDis
+
+#====================== DEG PPI
+PPI_Method = Interaction
+Taxid = 9606  #"9606" "10090" or "other" 
+
+#====================== DEG TF prediction
+TF_Method = Hmmsearch  # Hmmsearch for plant, AnimalTFDB for animal
+Speciestaxid = 9606 # 9606" "10090" or "other"  for AnimalTFDB
+Getorf_Options = -minsize 150 
+
+#====================== DEG PRG
+PRG_Method = Diamond #Blast / Diamond
+PRG_Kingdom = Plant
+PRG_Blast_Options = -evalue 1e-5 -num_threads 6 -outfmt 6 -max_target_seqs 1
+PRG_Diamond_Options = --evalue 1e-5 --threads 6 --outfmt 6 --max-target-seqs 1 --more-sensitive
+PRG_Filter = -cov 50 -iden 40
+
+#====================== DEG PHI
+#PHI_Method = Diamond   #Blast / Diamond
+PHI_Kingdom = Fungi
+PHI_Blast_Options = -evalue 1e-5 -num_threads 6 -outfmt 6 -max_target_seqs 1
+PHI_Diamond_Options = --evalue 1e-5 --threads 6 --outfmt 6 --max-target-seqs 1 --more-sensitive
+PHI_Filter = -cov 50 -iden 40
+
