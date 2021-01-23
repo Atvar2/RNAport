@@ -1,0 +1,1 @@
+python    /hwfswh2/BC_COM_P5/F19FTSCCWLJ2258/HICygxD/F20FTSCCKF1773_NICzjkE/bin/RNAport_v1/RNAport/RNAKit.py   rnarefcfg   input.PE.conf    --projectfile    project.xlsx   --rename   --indexdir   /hwfswh2/BC_COM_P5/F19FTSCCWLJ2258/HICygxD/F20FTSCCKF1773_NICzjkE/00.ref/01.index
