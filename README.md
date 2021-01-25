@@ -1,5 +1,5 @@
 # RNAport
-This pipeline provide the port for running RNA ref and RNA denovo pipeline
+#This pipeline provide the port for running RNA ref and RNA denovo pipeline
 chenjunhui/RNAport is licensed under the
 
 GNU General Public License v3.0
