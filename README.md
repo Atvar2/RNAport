@@ -116,7 +116,7 @@ Options:
   ```
   Contributor
   ==============================================================================================
-  chenjhbio  ![chenjunhui]chenjunhui@genomics.cn  or  chenjhbio@163.com
+  **chenjhbio**  **chenjunhui@genomics.cn**  or  **chenjhbio@163.com**
   
   
   
