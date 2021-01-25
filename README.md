@@ -32,7 +32,6 @@ as following
 ```
 export PATH="$PREFIX_PATH/bin:$PATH"
 RNAport  --help
-```
 Usage: RNAport [OPTIONS] COMMAND [ARGS]...
 
   Welcome to use the RNAKit for preparing config of RNA pipeline. :param
@@ -47,3 +46,4 @@ Commands:
   getdata    get raw data list for RNA reference pipeline
   rnadenvo
   rnarefcfg  ...
+  ```
