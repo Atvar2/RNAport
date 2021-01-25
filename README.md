@@ -47,3 +47,77 @@ Commands:
   rnadenvo
   rnarefcfg  ...
   ```
+  *********************************************************************************************************************
+  * sub command getdata
+```
+RNAport     getdata   --help
+Usage: RNAport getdata [OPTIONS]
+
+  get raw data list for RNA reference pipeline
+
+Options:
+  --rawdir TEXT   path of raw data
+  --bmsinfo TEXT  BMS information, format: code sample library
+  --outfile TEXT  output file
+  -h, --help      Show this message and exit.
+  ```
+  * sub command  rnadenvo
+  ```
+  RNAport    rnadenvo   --help
+  Usage: RNAport rnadenvo [OPTIONS] DENOVOCONFIG
+
+Options:
+  --rawdir TEXT        path of raw data
+  --bmsinfo TEXT       BMS information, format: code sample library
+  --outfile TEXT       output file
+  --rename             rename sample name in the project
+  --diffmethod TEXT    Gene Diff Expression method
+  --managermail TEXT   project manager email
+  --analysismail TEXT  Analysis email
+  --subcode TEXT       subcode of the project
+  --projectname TEXT   Project name
+  --speciename TEXT    specie Name
+  --group TEXT         group of analysis
+  --queue TEXT         queue of analysis
+  --cleandata INTEGER  data size of clean data
+  --platform TEXT      sequencing Platform
+  -h, --help           Show this message and exit.
+```
+* sub command  rnarefcfg
+```
+RNAport  rnarefcfg    --help
+Usage: RNAport rnarefcfg [OPTIONS] REFCONFIG
+
+  indexFiles=['refMrna.fa','chrALL.fa.dict','chrALL.fa.1.ht2l','refMrna.gtf'
+  ,'refPep.fa','specie.nr.desc','gene2tr.txt'] :param RNArefcfg: :param
+  projectFile: :param rename: :param diffMethod: :param indexdir: :param
+  managerMail: :param analysisMail: :param subCode: :param projectName:
+  :param specieName: :param group: :param queue: :param CleanData: :param
+  platForm: :return:
+
+Options:
+  --rawdir TEXT        path of raw data
+  --bmsinfo TEXT       BMS information, format: code sample library
+  --outfile TEXT       output file
+  --projectfile TEXT   project file provided
+  --rename             rename sample name in the project
+  --diffmethod TEXT    Gene Diff Expression method
+  --indexdir TEXT      directory of genome database index
+  --managermail TEXT   project manager email
+  --analysismail TEXT  Analysis email
+  --subcode TEXT       subcode of the project
+  --projectname TEXT   Project name
+  --speciename TEXT    specie Name
+  --group TEXT         group of analysis
+  --queue TEXT         queue of analysis
+  --cleandata INTEGER  data size of clean data
+  --platform TEXT      sequencing Platform
+  -h, --help           Show this message and exit.
+  ```
+  Contributor
+  ==============================================================================================
+  chenjhbio  ![chenjunhui]chenjunhui@genomics.cn  or  chenjhbio@163.com
+  
+  
+  
+  
