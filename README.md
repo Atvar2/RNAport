@@ -5,11 +5,16 @@ chenjunhui/RNAport is licensed under the
 GNU General Public License v3.0
 Permissions of this strong copyleft license are conditioned on making available complete source code of licensed works and modifications, which include larger works using a licensed work, under the same license. Copyright and license notices must be preserved. Contributors provide an express grant of patent rights.
 
+Decription
+============================================================================================================================
+The port is used for preparing config file for RNA reference and RNA denovo. The Click package was used for command port.Three
+subcommands getdata, rnadenovo and rnarefcfg was included in the main software.
+
 RNAport  provide the port for running RNA reference or RNA denovo pipeline basing on project
-====
+=============================================================================================================================
 
 Installation
-===
+=============================================================================================================================
 This RNAport were tested by python 3.6 under Linux wh-login-13-1.wh.hpc system. The software depends on click and xlrd packages.</br>
 You can install it by pip or raw code just as the following command.
 
