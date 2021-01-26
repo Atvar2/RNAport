@@ -15,7 +15,7 @@ RNAport  provide the port for running RNA reference or RNA denovo pipeline basin
 
 Installation
 =============================================================================================================================
-This RNAport were tested by python 3.6 under Linux wh-login-13-1.wh.hpc system. The software depends on click and xlrd packages.</br>
+This RNAport was tested by python 3.6 under Linux wh-login-13-1.wh.hpc system. The software depends on `click` and `xlrd` packages.</br>
 You can install it by pip or raw code just as the following command.
 
 Raw code installation
