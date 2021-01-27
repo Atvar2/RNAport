@@ -58,6 +58,10 @@ class readXLS(readXLSHead):
 					ed=s
 					
 					subEle=row[st:ed]
+					if subEle[1] == subEle[2]:
+						print('diffrent group %s vs %s are the same name, please check it, the port will skip it' % (subEle[1],subEle[2]))
+						continue
+						
 					self.diffGroup[subEle[0]]="%s&%s" % (subEle[1],subEle[2])
 			if flag == 1:
 				row=sheet1.row_values(i)[1:]
@@ -110,7 +114,7 @@ class readXLS(readXLSHead):
 			else:
 				clusterPRJ=SCproject
 		return clusterPRJ
-	################## Fo database index ######################################
+	################## For database index ######################################
 	def databaseIndex(self):
 		databaseFile=dict()
 		databaseFile=findFile(self.indexdir,self.indexFiles)
